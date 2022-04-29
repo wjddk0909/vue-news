@@ -10,6 +10,11 @@ export const store = new Vuex.Store({
         ask: [],
         jobs: []
     },
+    getters: {
+        fetchedAsk(state) {
+            return state.ask;
+        }
+    },
     mutations: {
         SET_NEWS(state, news) { // state라는 인자로 state에 접근 가능, actions에서 response.data로 넘긴 데이터를 news로 받음
             state.news = news;
@@ -32,10 +37,10 @@ export const store = new Vuex.Store({
                 console.log(error)
             })
         },
-        FETCH_ASK(context) {
+        FETCH_ASK({ commit }) {
             fetchAskList()
-            .then(response => {
-                context.commit('SET_ASK', response.data);
+            .then(({ data }) => {
+                commit('SET_ASK', data);
             })
             .catch(error => {
                 console.log(error);
