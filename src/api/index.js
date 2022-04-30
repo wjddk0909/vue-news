@@ -24,9 +24,14 @@ function fetchUserInfo(username) {
     return axios.get(`${config.baseUrl}user/${username}.json`);
 }
 
+function fetchItemInfo(itemId) {
+    return axios.get(`${config.baseUrl}item/${itemId}.json`);
+}
+
 export { // 정의한 함수를 다른데서 import로 쓸 수 있도록 export해줘야 함
     fetchNewsList,
     fetchAskList,
     fetchJobsList,
-    fetchUserInfo
+    fetchUserInfo,
+    fetchItemInfo
 }

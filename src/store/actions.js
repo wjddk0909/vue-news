@@ -1,4 +1,4 @@
-import { fetchNewsList, fetchAskList, fetchJobsList, fetchUserInfo } from '@/api/index.js'
+import { fetchNewsList, fetchAskList, fetchJobsList, fetchUserInfo, fetchItemInfo } from '@/api/index.js'
 export default {
     FETCH_NEWS(context) { // context라는 인자는 mutations에 접근 할 수 있게 해줌
         fetchNewsList()
@@ -36,5 +36,14 @@ export default {
         .catch(error => {
             console.log(error);
         })
-    } 
+    } ,
+    FETCH_ITEM({ commit }, id) {
+        fetchItemInfo(id)
+        .then(({ data }) => {
+            commit('SET_ITEM', data);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
 }
