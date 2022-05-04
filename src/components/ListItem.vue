@@ -1,9 +1,9 @@
 <template>
   <div>
     <ul class="news-list">
-      <li v-for="item in this.$store.state.news" :key="item.id" class="post">
+      <li v-for="item in listItems" :key="item.id" class="post">
         <div class="points">
-          {{ item.points }}
+          {{ item.points || 0 }}
         </div>
         <div>
           <p class="news-title">
@@ -42,7 +42,16 @@ export default {
     }
   },
   computed: {
-    
+    listItems() {
+      const name = this.$route.name;
+      if(name === 'news') {
+      return this.$store.state.news;
+    } else if(name === 'ask') {
+      return this.$store.state.ask
+    } else {
+      return this.$store.state.jobs
+    }
+    }
   }
 };
 </script>
