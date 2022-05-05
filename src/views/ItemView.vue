@@ -3,18 +3,12 @@
         <section>
             <!-- 사용자 정보 -->
             <user-profile :info="fetchedItem">
-                <div slot="username">{{ fetchedItem.user }}</div>
-                <div slot="time">{{ fetchedItem.time_ago }}</div>
+                <!-- <div slot="username">{{ fetchedItem.user }}</div> -->
+                <router-link slot="username" :to="`/user/${fetchedItem.user}`">
+                    {{ fetchedItem.user }}
+                </router-link>
+                <div slot="time">{{ 'Posted ' + fetchedItem.time_ago }}</div>
             </user-profile>
-            <!-- <div class="user-container">
-                <div>
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="user-description">
-                    <router-link :to="`/user/${fetchedItem.user}`">{{ fetchedItem.user }}</router-link>
-                    <div class="time">{{ fetchedItem.time_ago }}</div>
-                </div>
-            </div> -->
         </section>
         <section>
             <h2>{{ fetchedItem.title }}</h2>
