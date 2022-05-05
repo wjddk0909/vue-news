@@ -25,13 +25,6 @@
             <a v-else v-bind:href="item.url">{{ item.domain }}</a>
           </small>
         </div>
-        <!-- <a v-bind:href="item.url">
-          {{ item.title }}
-        </a>
-        <small>
-          {{ item.time_ago }} 
-          by <router-link :to="`/user/${item.user}`">{{ item.user }}</router-link>
-        </small> -->
       </li>
     </ul>
   </div>
@@ -39,18 +32,6 @@
 
 <script>
 export default {
-    created() {
-    // this.$store.dispatch('FETCH_NEWS');
-    console.log(this.$route.path === '/news'); 
-    const name = this.$route.name;
-    if(name === 'news') {
-      this.$store.dispatch('FETCH_NEWS');
-    } else if(name === 'ask') {
-      this.$store.dispatch('FETCH_ASK');
-    } else if(name === 'jobs') {
-      this.$store.dispatch('FETCH_JOBS');
-    }
-  },
   computed: {
     listItems() {
       const name = this.$route.name;
