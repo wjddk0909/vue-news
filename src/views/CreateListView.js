@@ -7,7 +7,7 @@ export default function createListView(name) {
         name: name,
         created() {
             bus.$emit('start:spinner');
-            setTimeout(() => {
+            // setTimeout(() => {
             this.$store.dispatch('FETCH_LIST', this.$route.name)
             .then(() => {
                 console.log('fetched');
@@ -16,7 +16,7 @@ export default function createListView(name) {
             .catch((error) => {
                 console.log(error);
             })
-            }, 3000)
+            // }, 3000)
         },
         render(createElement) {
             return createElement(ListView);
