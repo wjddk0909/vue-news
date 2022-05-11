@@ -1,7 +1,7 @@
 import { fetchNewsList, fetchAskList, fetchJobsList, fetchList, fetchUserInfo, fetchItemInfo } from '@/api/index.js'
 export default {
     FETCH_NEWS(context) { // context라는 인자는 mutations에 접근 할 수 있게 해줌
-        fetchNewsList()
+        return fetchNewsList()
         .then(response => {
             console.log(response.data);
             context.commit('SET_NEWS', response.data);
@@ -12,7 +12,7 @@ export default {
         })
     },
     FETCH_ASK({ commit }) {
-        fetchAskList()
+        return fetchAskList()
         .then(({ data }) => {
             commit('SET_ASK', data);
         })
@@ -21,7 +21,7 @@ export default {
         })
     },
     FETCH_JOBS({ commit }) { // Destructuring var obj = {a:10} var a = obj.a; var {a} = obj;
-        fetchJobsList()
+        return fetchJobsList()
         .then(({ data }) => {
             commit('SET_JOBS', data);
         })
@@ -30,7 +30,7 @@ export default {
         }) 
     },
     FETCH_USER({ commit }, name) {
-        fetchUserInfo(name)
+        return fetchUserInfo(name)
         .then(({ data }) => {
             commit('SET_USER', data);
         })
@@ -39,7 +39,7 @@ export default {
         })
     } ,
     FETCH_ITEM({ commit }, id) {
-        fetchItemInfo(id)
+        return fetchItemInfo(id)
         .then(({ data }) => {
             commit('SET_ITEM', data);
         })
@@ -47,11 +47,17 @@ export default {
             console.log(error)
         })
     },
+    // #2
     FETCH_LIST({ commit }, pageName) {
-        fetchList(pageName)
-            .then(({ data }) => commit('SET_LIST', data))
+        // #3 fetchList 라는 api 호출
+        return fetchList(pageName) // return을 해줘야 fetchList에 대한 결과가 프로미스로 체이닝 돼서 FETCH_LIST가 ListMixin에서 .then이 될 수 있게 함
+            .then(({ data }) => {
+                // #4
+                console.log(4)
+                commit('SET_LIST', data)
+            })
             .catch(error => {
                 console.log(error)
             })
-    }
+    },
 }
