@@ -34,9 +34,6 @@ export const router = new VueRouter(({
                 .catch((error) => {
                 console.log(error);
                 })
-                // console.log('to', to);
-                // console.log('from', from);
-                // console.log('next', next);
             }
         },
         {
@@ -44,6 +41,18 @@ export const router = new VueRouter(({
             name: 'ask',
             component: AskView,
             // component: createListView('AskView'),
+            beforeEnter: (to, from, next) => {
+                bus.$emit('start:spinner');
+                store.dispatch('FETCH_LIST', to.name)
+                .then(() => {
+                console.log('fetched');
+                // bus.$emit('end:spinner');
+                next();
+                })
+                .catch((error) => {
+                console.log(error);
+                })
+            }
         },
         {
             path: '/jobs',
