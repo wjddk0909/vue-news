@@ -52,8 +52,6 @@ export default {
         // #3 fetchList 라는 api 호출
         return fetchList(pageName) // return을 해줘야 fetchList에 대한 결과가 프로미스로 체이닝 돼서 FETCH_LIST가 ListMixin에서 .then이 될 수 있게 함
             .then(({ data }) => {
-                // #4
-                console.log(4)
                 commit('SET_LIST', data)
             })
             .catch(error => {
