@@ -1,17 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button @click="loginUser">login</button>
+    <h1>List</h1>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  methods: {
+    loginUser() {
+      axios.get('https://jsonplaceholder.typicode.com/users/1')
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+    }
   }
 }
 </script>
