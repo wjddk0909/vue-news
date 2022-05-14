@@ -22,7 +22,7 @@ export default {
       axios.get('https://jsonplaceholder.typicode.com/users/1')
         .then(response => {
           if (response.data.id === 1) {
-            console.log('사용자가 인증되었습니다.')
+            console.log('사용자가 인증되었습니다!')
             axios.get('https://jsonplaceholder.typicode.com/todos')
             .then(response => {
               this.items = response.data
