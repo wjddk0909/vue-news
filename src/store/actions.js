@@ -1,15 +1,22 @@
 import { fetchNewsList, fetchAskList, fetchJobsList, fetchList, fetchUserInfo, fetchItemInfo } from '@/api/index.js'
 export default {
-    FETCH_NEWS(context) { // context라는 인자는 mutations에 접근 할 수 있게 해줌
-        return fetchNewsList()
-        .then(response => {
-            console.log(response.data);
-            context.commit('SET_NEWS', response.data);
-            return response;
-        })
-        .catch(error => {
-            console.log(error)
-        })
+    // promise
+    // FETCH_NEWS(context) { // context라는 인자는 mutations에 접근 할 수 있게 해줌
+    //     return fetchNewsList()
+    //         .then(response => {
+    //             console.log(response.data);
+    //             context.commit('SET_NEWS', response.data);
+    //             return response;
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         })
+    // },
+    // async
+    async FETCH_NEWS(context) {
+        const response = await fetchNewsList(); // promise를 반환하는 함수나 api앞에 await를 붙여줌, const response -> promise방식에서 then의 response를 받는것과 같음
+        context.commit('SET_NEWS', response.data);
+        return response; // 화면에서 비동기 순서를 보장하기 위해서 결과값을 반환을 해줘야 fetchNewsList 실행하고 다음의 처리들을 이어서 할 수 있음
     },
     FETCH_ASK({ commit }) {
         return fetchAskList()
